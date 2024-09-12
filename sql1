@@ -1,1 +1,83 @@
 
+Create database uss;
+
+use uss;
+drop table student;
+drop table comment;
+
+create table student ( 
+
+   id  bigint, 
+
+   firstname varchar(256), 
+
+   lastname  varchar(256), 
+
+   PRIMARY KEY (id)
+
+);  
+
+
+create table stgroup(
+	code varchar(8),
+    description varchar(256),
+    
+    primary key(code)
+);
+
+create table course(
+code varchar(8),
+description varchar(256),
+
+primary key(code)
+);
+
+insert into student(id, firstname, lastname) Values(1,"a","b");
+insert into student(id, firstname, lastname) Values(2,"b","b");
+insert into student(id, firstname, lastname) Values(3,"c","b");
+insert into student(id, firstname, lastname) Values(4,"d","b");
+insert into student(id, firstname, lastname) Values(5,"e","b");
+insert into student(id, firstname, lastname) Values(6,"f","b");
+
+insert into stgroup(code, description) Values("TA-23A", "Tarkvara");
+insert into stgroup(code, description) Values("TA-23B", "Tarkvara (vene)");
+
+insert into course(code, description) Values("TA-23A", "Tarkvara");
+insert into course(code, description) Values("TA-23B", "Tarkvara (vene)");
+
+ALTER TABLE student 
+ADD column groupcode varchar(8); 
+
+ALTER TABLE student 
+ADD column birthday DATE; 
+
+Update student
+set groupcode = "TA-23A", birthday = "2000-3-30"
+where id > 0;
+
+update student
+set groupcode = "TA-23A", birthday = "2000-3-30"
+where id = 2;
+
+select * from course;
+select * from stgroup;
+select * from student;
+
+Select student.firstname, course.code from course
+inner join student on student.firstname=course.code;
+use uss;
+create table comment(
+id bigint,
+studentid bigint,
+comment varchar(256),
+primary key(id),
+foreign key(studentid) references student(id)
+);
+
+insert into comment(id, studentid, comment) Value(1, 1, "märkus");
+insert into comment(id, studentid, comment) Value(1, 1, "märkus2");
+insert into comment(id, studentid, comment) Value(1, 1, "märkus3");
+insert into comment(id, studentid, comment) Value(1, 1, "märkus4");
+
+
+
